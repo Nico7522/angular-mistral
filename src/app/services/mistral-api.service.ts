@@ -17,6 +17,7 @@ export interface MistralRequest {
 interface Message {
   role: 'user' | 'AI' | 'system';
   content: string | ContentChunk[] | undefined;
+  date: Date;
 }
 
 @Injectable({
@@ -29,7 +30,7 @@ export class MistralApiService {
     },
     computation: (source, previous) => {
       if (source) {
-        return [...(previous?.value ?? []), { role: 'AI', content: source ?? '' }];
+        return [...(previous?.value ?? []), { role: 'AI', content: source ?? '', date: new Date() }];
       }
 
       return previous?.value ?? [];
@@ -48,28 +49,19 @@ export class MistralApiService {
     const request = this.requestSignal();
     return request.messages[0].content
       ? {
-          url: environment.API_URL,
+          url: '/api' + environment.API_URL,
           method: 'POST',
           body: request,
-          headers: {
-            Authorization: `Bearer ${environment.API_KEY}`,
-            'Content-Type': 'application/json',
-          },
         }
       : undefined;
   });
 
-  // Computed signal for the response status
-  readonly responseStatus = computed(() => {
-    return this.mistralResponse.status();
+  readonly error = computed(() => {
+    return this.mistralResponse.status() === 'error';
   });
 
-  readonly errorMessage = computed(() => {
-    return this.mistralResponse.status() === 'error' ? 'Error...' : '';
-  });
-
-  readonly loadingMessage = computed(() => {
-    return this.mistralResponse.status() === 'loading' ? 'Loading...' : '';
+  readonly loading = computed(() => {
+    return this.mistralResponse.status() === 'loading';
   });
 
   /**
@@ -86,7 +78,7 @@ export class MistralApiService {
    * Send a simple message and get response
    */
   sendMessage(content: string, model = 'mistral-large-latest'): void {
-    this.messageList.update(prev => [...(prev ?? []), { role: 'user', content }]);
+    this.messageList.update(prev => [...(prev ?? []), { role: 'user', content, date: new Date() }]);
     this.updateRequest({
       model,
       messages: [{ role: 'user', content }],

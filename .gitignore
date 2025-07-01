@@ -44,4 +44,4 @@ Thumbs.db
 
 environment.ts
 environment.development.ts
-
+proxy.conf.json

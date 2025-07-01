@@ -25,7 +25,7 @@
                     <div class="message-bubble">
                         <p>{{ message.content }}</p>
                     </div>
-                    <div class="message-time">12:01 PM</div>
+                    <div class="message-time">{{ message.date | date:'HH:mm' }}</div>
                 </div>
             </div>
             }
@@ -34,7 +34,7 @@
         </div>
     </div>
     <!-- AI is writing popup -->
-    @if (loadingMessage()) {
+    @if (loading()) {
     <div class="ai-writing-popup">
         <span class="typing-indicator">
             <span></span><span></span><span></span>
