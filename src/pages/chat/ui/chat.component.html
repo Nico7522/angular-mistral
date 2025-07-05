@@ -1,14 +1,15 @@
 <section class="chat-container">
+
     <header class="chat-header">
         <div class="header-content">
             <button class="back-button" routerLink="/">
                 <span class="back-icon">←</span>
-                Back
+                Retour
             </button>
-            <h1 class="chat-title">Chat Title</h1>
+            <h1 class="chat-title">Chat</h1>
             <div class="status-indicator">
                 <span class="status-dot"></span>
-                <span class="status-text">Online</span>
+                <span class="status-text">En ligne</span>
             </div>
         </div>
     </header>
@@ -21,6 +22,10 @@
 
             }
         </div>
+        @if (error()) {
+        <app-error message="Une erreur est survenue" />
+        }
+
     </main>
     <!-- AI is writing popup -->
     @if (loading()) {
@@ -28,13 +33,16 @@
         <span class="typing-indicator">
             <span></span><span></span><span></span>
         </span>
-        <span class="ai-writing-text">AI is writing…</span>
+        <span class="ai-writing-text">L'IA est en train de répondre…</span>
     </aside>
     }
-    <div class="chat-input-container">
-        <input class="chat-input" type="text" placeholder="Type your message..." [(ngModel)]="userInput" />
-        <button class="send-button" (click)="sendMessage()">
+    <aside class="chat-input-container">
+        <input class="chat-input" type="text" placeholder="Tapez votre message..." [(ngModel)]="userInput" />
+        <button [disabled]="loading()" class="send-button" (click)="sendMessage()">
             <span class="send-icon">➤</span>
         </button>
-    </div>
+
+    </aside>
+
+
 </section>

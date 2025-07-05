@@ -3,14 +3,12 @@ import { MistralApiService } from '../api/mistral-api.service';
 import { FormsModule } from '@angular/forms';
 import { MessageComponent } from '../../../shared/ui/message/message.component';
 import { RouterLink } from '@angular/router';
+import { ErrorComponent } from '../../../shared/ui/error/error.component';
 
 @Component({
   selector: 'app-chat',
-  imports: [FormsModule, MessageComponent, RouterLink],
+  imports: [FormsModule, MessageComponent, RouterLink, ErrorComponent],
   templateUrl: './chat.component.html',
-  host: {
-    class: 'p-4 bg-gray-300 flex',
-  },
   styleUrl: './chat.component.css',
 })
 export class ChatComponent {
@@ -22,6 +20,5 @@ export class ChatComponent {
   sendMessage(): void {
     this._mistralApiService.sendMessage(this.userInput());
     this.userInput.set('');
-    console.log(this.messages());
   }
 }
