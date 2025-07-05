@@ -1,12 +1,16 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { MistralApiService } from '../services/mistral-api.service';
+import { MistralApiService } from '../api/mistral-api.service';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { MessageComponent } from '../../../shared/ui/message/message.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
-  imports: [FormsModule, DatePipe],
+  imports: [FormsModule, MessageComponent, RouterLink],
   templateUrl: './chat.component.html',
+  host: {
+    class: 'p-4 bg-gray-300 flex',
+  },
   styleUrl: './chat.component.css',
 })
 export class ChatComponent {

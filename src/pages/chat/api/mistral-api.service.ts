@@ -1,29 +1,15 @@
-import { computed, Injectable, linkedSignal, signal } from '@angular/core';
-import { httpResource } from '@angular/common/http';
+import { computed, inject, Injectable, linkedSignal, signal } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { ChatCompletionResponse } from '@mistralai/mistralai/models/components/chatcompletionresponse';
-import { environment } from '../../environments/environment';
-import { ContentChunk } from '@mistralai/mistralai/models/components/contentchunk';
-
-export interface MistralRequest {
-  model: string;
-  messages: {
-    role: 'user' | 'AI' | 'system';
-    content: string;
-  }[];
-  temperature?: number;
-  max_tokens?: number;
-}
-
-interface Message {
-  role: 'user' | 'AI' | 'system';
-  content: string | ContentChunk[] | undefined;
-  date: Date;
-}
+import { environment } from '../../../environments/environment';
+import { Message } from '../../../shared/models/message';
+import { MistralRequest } from '../models/mistral-request';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MistralApiService {
+  private http = inject(HttpClient);
   messageList = linkedSignal<string, Message[]>({
     source: () => {
       return this.mistralResponse.value()?.choices?.[0]?.message?.content as string;

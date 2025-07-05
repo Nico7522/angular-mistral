@@ -1,7 +1,7 @@
-<div class="chat-container">
-    <div class="chat-header">
+<section class="chat-container">
+    <header class="chat-header">
         <div class="header-content">
-            <button class="back-button">
+            <button class="back-button" routerLink="/">
                 <span class="back-icon">←</span>
                 Back
             </button>
@@ -11,36 +11,25 @@
                 <span class="status-text">Online</span>
             </div>
         </div>
-    </div>
-    <div class="chat-messages">
+    </header>
+    <main class="chat-messages">
         <div class="message">
             @for (message of messages(); track message) {
             @if (message) {
-            <div class="message" [class.user-message]="message.role === 'user'"
-                [class.assistant-message]="message.role === 'AI'">
-                <div class="message-avatar">
-                    <span class="user-avatar">{{ message.role }}</span>
-                </div>
-                <div class="message-content">
-                    <div class="message-bubble">
-                        <p>{{ message.content }}</p>
-                    </div>
-                    <div class="message-time">{{ message.date | date:'HH:mm' }}</div>
-                </div>
-            </div>
+            <app-message [message]="message"></app-message>
             }
 
             }
         </div>
-    </div>
+    </main>
     <!-- AI is writing popup -->
     @if (loading()) {
-    <div class="ai-writing-popup">
+    <aside class="ai-writing-popup">
         <span class="typing-indicator">
             <span></span><span></span><span></span>
         </span>
         <span class="ai-writing-text">AI is writing…</span>
-    </div>
+    </aside>
     }
     <div class="chat-input-container">
         <input class="chat-input" type="text" placeholder="Type your message..." [(ngModel)]="userInput" />
@@ -48,4 +37,4 @@
             <span class="send-icon">➤</span>
         </button>
     </div>
-</div>
+</section>

@@ -1,59 +1,180 @@
-# MistralIntegration
+# 🤖 Mistral AI Chat Integration
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+Un projet de test et d'expérimentation utilisant l'API Mistral AI pour créer une interface de chat intelligente, développé avec Angular 20 et testé avec Cursor IDE.
 
-## Development server
+## 🎯 Objectifs du Projet
 
-To start a local development server, run:
+Ce projet a été créé pour :
 
-```bash
-ng serve
-```
+- **Tester l'API Mistral AI** : Expérimenter avec les modèles de langage Mistral pour la génération de texte
+- **Évaluer Cursor IDE** : Tester les capacités de développement assisté par IA de Cursor
+- **Démonstrer Angular 20** : Utiliser les dernières fonctionnalités d'Angular (Signals, Control Flow, etc.)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## ✨ Fonctionnalités
 
-## Code scaffolding
+- 💬 **Chat en temps réel** avec l'API Mistral AI
+- 🎨 **Interface moderne** avec Tailwind CSS et DaisyUI
+- ⚡ **Performance optimisée** avec Angular 20 Signals
+- 🔄 **Proxy configuré** pour éviter les problèmes CORS (mais il n'y a pas d'appel API 💩)
+- 📱 **Design responsive** pour tous les appareils
+- ⏳ **Indicateurs de chargement** pendant la génération
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠️ Technologies Utilisées
 
-```bash
-ng generate component component-name
-```
+- **Frontend** : Angular 20 (Signals, Control Flow, Standalone Components)
+- **Styling** : CSS
+- **API** : Mistral AI (@mistralai/mistralai)
+- **IDE** : Cursor (développement assisté par IA)
+- **Proxy** : Angular Dev Server Proxy
+- **Linting** : ESLint + Prettier
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚀 Installation et Démarrage
 
-```bash
-ng generate --help
-```
+### Prérequis
 
-## Building
+- Node.js 18+
+- npm ou yarn
+- Clé API Mistral AI
 
-To build the project run:
+### Installation
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+1. **Cloner le repository**
 
 ```bash
-ng e2e
+git clone <votre-repo>
+cd mistral-integration
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+2. **Installer les dépendances**
 
-## Additional Resources
+```bash
+npm install
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. **Configuration de l'API Mistral**
+   - Créez un fichier `src/environments/environment.ts`
+   - Ajoutez votre clé API :
+
+```typescript
+export const environment = {
+  production: false,
+  API_URL: '/v1/chat/completions',
+  MISTRAL_API_KEY: 'votre-clé-api-ici',
+};
+```
+
+4. **Démarrer le serveur de développement**
+
+```bash
+npm start
+```
+
+5. **Ouvrir l'application**
+   - Naviguez vers `http://localhost:4200`
+   - Le proxy est configuré pour rediriger `/api/*` vers `https://api.mistral.ai/*`
+
+## 📁 Structure du Projet
+
+```
+src/
+├── pages/
+│   └── chat/                    # Feature de chat
+│       ├── api/
+│       │   └── mistral-api.service.ts
+│       └── ui/
+│           └── chat.component.ts
+├── shared/
+│   ├── models/
+│   │   └── message.ts
+│   └── ui/
+│       └── message/
+└── environments/
+    └── environment.ts
+```
+
+## 🔧 Configuration
+
+### Proxy Configuration
+
+Le projet utilise un proxy pour éviter les problèmes CORS :
+
+```json
+{
+  "/api": {
+    "target": "https://api.mistral.ai",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/api": "" }
+  }
+}
+```
+
+### Modèles Mistral Supportés
+
+- `mistral-large-latest` (par défaut)
+- `mistral-medium-latest`
+- `mistral-small-latest`
+
+## 🧪 Tests
+
+```bash
+# Tests unitaires
+npm test
+
+# Linting
+npm run lint
+
+# Build de production
+npm run build
+```
+
+## 🎨 Interface Utilisateur
+
+L'interface comprend :
+
+- **Header** avec titre et indicateur de statut
+- **Zone de messages** avec défilement automatique
+- **Indicateur de frappe** pendant la génération
+- **Zone de saisie** avec bouton d'envoi
+- **Design responsive** et animations fluides
+
+## 🔍 Fonctionnalités Techniques
+
+### Angular 20 Features Utilisées
+
+- **Signals** pour la réactivité
+- **Control Flow** (@if, @for) au lieu des directives structurelles
+- **Standalone Components** sans NgModules
+- **Modern DI** avec `inject()` function
+- **httpResource** pour les requêtes HTTP réactives
+
+### Gestion d'État
+
+- Signaux réactifs pour les messages
+- Gestion automatique du loading et des erreurs
+- Persistance locale des conversations
+
+## 🤝 Contribution
+
+Ce projet est un projet de test et d'expérimentation. Les contributions sont les bienvenues !
+
+## 📝 Notes sur Cursor IDE
+
+Ce projet a été développé en utilisant Cursor IDE pour tester :
+
+- La génération de code assistée par IA
+- Les suggestions de refactoring
+- L'aide à la résolution de bugs
+- L'amélioration de la productivité développeur
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
+
+## 🙏 Remerciements
+
+- Merci Cursor
+
+---
+
+**Développé avec ❤️ et IA** 🤖

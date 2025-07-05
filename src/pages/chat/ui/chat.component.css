@@ -1,3 +1,5 @@
+
+
 .chat-container {
   position: relative;
   min-height: 100vh;
@@ -5,10 +7,11 @@
   flex-direction: column;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 100vw;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .chat-header {
@@ -83,8 +86,9 @@
   flex-direction: column;
   gap: 1.5rem;
   overflow-y: auto;
-  width: 100vw;
-  max-width: 100vw;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   scrollbar-width: thin;
   scrollbar-color: #667eea #f7fafc;
@@ -106,7 +110,6 @@
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
-.message,
 .welcome-message,
 .loading-message {
   display: flex;
@@ -115,65 +118,6 @@
   height: 500px;
 }
 
-.message.user-message {
-  flex-direction: row;
-}
-
-.message-avatar {
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.7rem;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.12);
-}
-
-.user-avatar {
-  color: #fff;
-}
-
-.message-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 70vw;
-}
-
-.message-bubble {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 18px 18px 18px 4px;
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
-  color: #2d3748;
-  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.08);
-  margin-bottom: 0.3rem;
-  word-break: break-word;
-  transition: background 0.2s;
-}
-
-.message-bubble.user {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
-  border-radius: 18px 18px 4px 18px;
-}
-.assistant-message {
-
-  flex-direction: row-reverse;
-}
-.message-bubble.assistant {
-  background: rgba(255, 255, 255, 0.95);
-  color: #2d3748;
-}
-
-.message-time {
-  font-size: 0.8rem;
-  color: #a0aec0;
-  margin-left: 0.2rem;
-}
 
 .typing-indicator {
   display: flex;
